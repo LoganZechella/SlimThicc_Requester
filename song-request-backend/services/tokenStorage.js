@@ -4,6 +4,7 @@ const path = require('path');
 
 // Local file fallback path
 const tokenPath = path.join(__dirname, '../config/spotify-token.json');
+const configDir = path.dirname(tokenPath);
 
 // Token schema
 const tokenSchema = new mongoose.Schema({
@@ -32,6 +33,18 @@ const initializeStorage = async () => {
   }
 };
 
+// Ensure config directory exists
+const ensureConfigDirExists = () => {
+  if (!fs.existsSync(configDir)) {
+    try {
+      fs.mkdirSync(configDir, { recursive: true });
+      console.log(`Created directory: ${configDir}`);
+    } catch (error) {
+      console.error(`Failed to create directory ${configDir}:`, error);
+    }
+  }
+};
+
 // Save token data
 const saveTokens = async (tokenData) => {
   try {
@@ -51,8 +64,16 @@ const saveTokens = async (tokenData) => {
     }
     
     // Always save to file as fallback
-    fs.writeFileSync(tokenPath, JSON.stringify(tokenData));
-    console.log('Tokens saved to file system');
+    try {
+      // Ensure directory exists
+      ensureConfigDirExists();
+      
+      fs.writeFileSync(tokenPath, JSON.stringify(tokenData));
+      console.log('Tokens saved to file system');
+    } catch (error) {
+      console.error('Error saving tokens to file system:', error);
+      // Continue even if file save fails - database is primary in production
+    }
     
     return true;
   } catch (error) {
@@ -89,10 +110,14 @@ const loadTokens = async () => {
     }
     
     // Fall back to file system
-    if (fs.existsSync(tokenPath)) {
-      const tokenData = JSON.parse(fs.readFileSync(tokenPath));
-      console.log('Tokens loaded from file system');
-      return tokenData;
+    try {
+      if (fs.existsSync(tokenPath)) {
+        const tokenData = JSON.parse(fs.readFileSync(tokenPath));
+        console.log('Tokens loaded from file system');
+        return tokenData;
+      }
+    } catch (error) {
+      console.error('Error reading token file:', error);
     }
     
     return null;

@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { submitSongRequest } from '../services/api';
+import Splitting from 'splitting';
 
 function SongRequestForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+  // Re-run Splitting when form renders
+  useEffect(() => {
+    Splitting();
+  }, []);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -24,7 +30,7 @@ function SongRequestForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
-        <label htmlFor="songTitle" className="form-label">
+        <label htmlFor="songTitle" className="form-label" data-splitting>
           Song Title
         </label>
         <input
@@ -40,7 +46,7 @@ function SongRequestForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="artistName" className="form-label">
+        <label htmlFor="artistName" className="form-label" data-splitting>
           Artist Name
         </label>
         <input
@@ -59,6 +65,7 @@ function SongRequestForm() {
         type="submit"
         disabled={isSubmitting}
         className={`btn btn-primary ${isSubmitting ? 'opacity-70' : ''}`}
+        data-splitting
       >
         {isSubmitting ? 'Submitting...' : 'Submit Request'}
       </button>

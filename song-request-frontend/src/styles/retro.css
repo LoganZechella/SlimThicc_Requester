@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+/* Import Splitting.js styles */
+@import 'splitting/dist/splitting.css';
+@import 'splitting/dist/splitting-cells.css';
+
+/* Retro Colors */
+:root {
+  --dark: #0a23af;
+  --light: #fd5d8d;
+  --white: #fff;
+}
+
+/* Scanline effect */
+.scanlines {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 300;
+  opacity: .8;
+  will-change: opacity;
+  animation: opacity 3s linear infinite;
+}
+
+.scanlines:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, .7) 51%);
+  background-size: 100% 2px;
+  will-change: background, background-size;
+  animation: scanlines .1s linear infinite;
+}
+
+/* Noise effect */
+.noise {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 400;
+  opacity: .8;
+  pointer-events: none;
+}
+
+.noise:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--noise-texture);
+  pointer-events: none;
+}
+
+.noise-moving {
+  opacity: 1;
+  z-index: 450;
+}
+
+.noise-moving:before {
+  will-change: background-position;
+  animation: noise 1s infinite alternate;
+}
+
+/* Retro background */
+.retro-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--dark);
+  z-index: -1;
+}
+
+/* VHS UI elements */
+.vhs-play {
+  position: fixed;
+  left: 2rem;
+  top: 2rem;
+  font-family: 'Press Start 2P', cursive;
+  color: var(--white);
+  font-size: 1.5rem;
+  z-index: 600;
+  will-change: text-shadow;
+  animation: rgbText 2s steps(9) 0s infinite alternate;
+}
+
+.vhs-play .char {
+  will-change: opacity;
+  animation: type 1.2s infinite alternate;
+  animation-delay: calc(60ms * var(--char-index));
+}
+
+.vhs-time {
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  font-family: 'Press Start 2P', cursive;
+  color: var(--white);
+  font-size: 1.5rem;
+  z-index: 600;
+  will-change: text-shadow;
+  animation: rgbText 1s steps(9) 0s infinite alternate;
+}
+
+.vhs-counter {
+  position: fixed;
+  left: 2rem;
+  bottom: 2rem;
+  font-family: 'Press Start 2P', cursive;
+  color: var(--white);
+  font-size: 1.2rem;
+  z-index: 600;
+  will-change: text-shadow;
+  animation: rgbText 1s steps(9) 0s infinite alternate;
+}
+
+/* Card styling for retro theme */
+.card {
+  width: 90%;
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 500;
+  background-color: rgba(10, 35, 175, 0.3) !important;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(253, 93, 141, 0.3);
+  color: var(--white);
+}
+
+/* RGB Text Effect */
+.retro-text {
+  font-family: 'Press Start 2P', cursive;
+  color: var(--white);
+  will-change: text-shadow;
+  animation: rgbText 2s steps(9) 0s infinite alternate;
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+/* Animated characters */
+.retro-text .char {
+  will-change: opacity;
+  animation: type 1.2s infinite alternate;
+  display: inline-block;
+}
+
+/* Staggered character animation */
+.retro-text .char:nth-child(2n) {
+  animation-delay: 120ms;
+}
+.retro-text .char:nth-child(3n) {
+  animation-delay: 180ms;
+}
+.retro-text .char:nth-child(4n) {
+  animation-delay: 240ms;
+}
+.retro-text .char:nth-child(5n) {
+  animation-delay: 300ms;
+}
+
+/* Input and button styling for retro theme */
+.form-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--white);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  padding: 1rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--light);
+  box-shadow: 0 0 10px var(--light), inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.btn-primary {
+  background: var(--light);
+  border: none;
+  color: var(--white);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  padding: 1rem;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px var(--light);
+  text-shadow: 0 0 5px var(--white);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 20px var(--light);
+  text-shadow: 0 0 10px var(--white);
+}
+
+/* Form label styling */
+.form-label {
+  color: var(--white);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 5px var(--white);
+}
+
+/* Error message styling */
+.text-red-600 {
+  color: #ff6b6b !important;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* Form spacing */
+.form-group {
+  margin-bottom: 2rem;
+}
+
+/* Placeholder text styling */
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+
+/* Animations */
+@keyframes noise {
+  0%, 100% {background-position: 0 0;}
+  10% {background-position: -5% -10%;}
+  20% {background-position: -15% 5%;}
+  30% {background-position: 7% -25%;}
+  40% {background-position: 20% 25%;}
+  50% {background-position: -25% 10%;}
+  60% {background-position: 15% 5%;}
+  70% {background-position: 0 15%;}
+  80% {background-position: 25% 35%;}
+  90% {background-position: -10% 10%;}
+}
+
+@keyframes opacity {
+  0% {opacity: .6;}
+  20% {opacity:.3;}
+  35% {opacity:.5;}
+  50% {opacity:.8;}
+  60% {opacity:.4;}
+  80% {opacity:.7;}
+  100% {opacity:.6;}
+}
+
+@keyframes scanlines {
+  from {
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, .5) 51%);
+    background-size: 100% 4px;
+  }
+  to {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, .5) 50%, transparent 51%);
+    background-size: 100% 4px;
+  }
+}
+
+@keyframes rgbText {
+  0% {
+    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 1px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+  }
+  25% {
+    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 1px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+  }
+  45% {
+    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 5px 0 1px rgba(251, 0, 231, 0.8), 0 5px 1px rgba(0, 233, 235, 0.8), -5px 0 1px rgba(0, 242, 14, 0.8), 0 -5px 1px rgba(244, 45, 0, 0.8), 5px 0 1px rgba(59, 0, 226, 0.8);
+  }
+  50% {
+    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), -5px 0 1px rgba(251, 0, 231, 0.8), 0 -5px 1px rgba(0, 233, 235, 0.8), 5px 0 1px rgba(0, 242, 14, 0.8), 0 5px 1px rgba(244, 45, 0, 0.8), -5px 0 1px rgba(59, 0, 226, 0.8);
+  }
+  55% {
+    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 3px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+  }
+  90% {
+    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), -5px 0 1px rgba(251, 0, 231, 0.8), 0 5px 1px rgba(0, 233, 235, 0.8), 5px 0 1px rgba(0, 242, 14, 0.8), 0 -5px 1px rgba(244, 45, 0, 0.8), 5px 0 1px rgba(59, 0, 226, 0.8);
+  }
+  100% {
+    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 5px 0 1px rgba(251, 0, 231, 0.8), 0 -5px 1px rgba(0, 233, 235, 0.8), -5px 0 1px rgba(0, 242, 14, 0.8), 0 5px 1px rgba(244, 45, 0, 0.8), -5px 0 1px rgba(59, 0, 226, 0.8);
+  }
+}
+
+@keyframes type {
+  0%, 19% {opacity:0;}
+  20%, 100% {opacity:1;}
+}
+
+/* Mobile styles */
+@media (max-width: 640px) {
+  .retro-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .form-label {
+    font-size: 0.7rem;
+  }
+  
+  .btn-primary {
+    font-size: 0.7rem;
+    padding: 0.8rem;
+  }
+} 

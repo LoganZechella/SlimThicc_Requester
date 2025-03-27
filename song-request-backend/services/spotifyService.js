@@ -1,6 +1,5 @@
 const SpotifyWebApi = require('spotify-web-api-node');
-const fs = require('fs');
-const path = require('path');
+const tokenStorage = require('./tokenStorage');
 
 // Spotify API credentials
 const spotifyApi = new SpotifyWebApi({
@@ -9,15 +8,17 @@ const spotifyApi = new SpotifyWebApi({
   redirectUri: process.env.SPOTIFY_REDIRECT_URI,
 });
 
-// Token storage path
-const tokenPath = path.join(__dirname, '../config/spotify-token.json');
-
 // Initialize Spotify
 const initializeSpotify = async () => {
   try {
-    // Check if we have stored tokens
-    if (fs.existsSync(tokenPath)) {
-      const tokenData = JSON.parse(fs.readFileSync(tokenPath));
+    // Initialize token storage
+    await tokenStorage.initializeStorage();
+    
+    // Get tokens from storage
+    const tokenData = await tokenStorage.loadTokens();
+    
+    // If we have tokens, use them
+    if (tokenData) {
       spotifyApi.setAccessToken(tokenData.accessToken);
       spotifyApi.setRefreshToken(tokenData.refreshToken);
       
@@ -48,7 +49,8 @@ const refreshAccessToken = async () => {
       expiresIn,
     };
     
-    fs.writeFileSync(tokenPath, JSON.stringify(tokenData));
+    // Save tokens using storage service
+    await tokenStorage.saveTokens(tokenData);
     
     // Schedule next refresh
     scheduleTokenRefresh(expiresIn);

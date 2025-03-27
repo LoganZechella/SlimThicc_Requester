@@ -89,7 +89,34 @@ const searchTrack = async (title, artist) => {
 const addToPlaylist = async (trackUri) => {
   try {
     const playlistId = process.env.SPOTIFY_PLAYLIST_ID;
+    
+    // Log playlist ID for debugging
+    console.log(`Attempting to add track to playlist: ${playlistId}`);
+    
+    // Check if we can access the playlist first
+    try {
+      const playlist = await spotifyApi.getPlaylist(playlistId);
+      console.log(`Successfully accessed playlist: ${playlist.body.name}`);
+    } catch (playlistError) {
+      console.error(`Cannot access playlist ${playlistId}:`, playlistError);
+      console.log('Checking if user owns this playlist...');
+      
+      // Get current user's ID
+      const me = await spotifyApi.getMe();
+      console.log(`Authenticated as user: ${me.body.id}`);
+      
+      // Get user's playlists
+      const userPlaylists = await spotifyApi.getUserPlaylists(me.body.id);
+      const ownedPlaylist = userPlaylists.body.items.find(p => p.id === playlistId);
+      
+      if (!ownedPlaylist) {
+        throw new Error(`User ${me.body.id} does not have access to playlist ${playlistId}. Please check playlist ownership or collaborator status.`);
+      }
+    }
+    
+    // Try to add the track
     await spotifyApi.addTracksToPlaylist(playlistId, [trackUri]);
+    console.log(`Successfully added track ${trackUri} to playlist ${playlistId}`);
     return true;
   } catch (error) {
     console.error('Error adding track to playlist:', error);

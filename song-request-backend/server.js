@@ -39,7 +39,12 @@ app.use('/api/song-requests', songRoutes);
 
 // Spotify Authentication Routes
 app.get('/login', (req, res) => {
-  const scopes = ['playlist-modify-public', 'playlist-modify-private'];
+  const scopes = [
+    'playlist-modify-public', 
+    'playlist-modify-private',
+    'playlist-read-private',
+    'playlist-read-collaborative'
+  ];
   const authorizeURL = spotifyApi.createAuthorizeURL(scopes);
   res.redirect(authorizeURL);
 });

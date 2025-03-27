@@ -2,7 +2,14 @@
   publish = "build"
   command = "npm run build"
 
+# Ensure all routes are handled by the React app
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200 
+  status = 200
+
+# Add cache control for static assets
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000" 

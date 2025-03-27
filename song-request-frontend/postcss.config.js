@@ -7,7 +7,7 @@ module.exports = {
       },
       stage: 3
     },
-    'tailwindcss': {},
-    'autoprefixer': {},
+    tailwindcss: {},
+    autoprefixer: {},
   },
 }

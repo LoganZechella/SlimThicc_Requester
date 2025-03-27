@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: slimthiccrequester
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8000
+      - key: SPOTIFY_CLIENT_ID
+        sync: false
+      - key: SPOTIFY_CLIENT_SECRET
+        sync: false
+      - key: SPOTIFY_REDIRECT_URI
+        value: https://slimthiccrequester.onrender.com/callback
+      - key: SPOTIFY_PLAYLIST_ID
+        sync: false 

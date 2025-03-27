@@ -93,12 +93,12 @@
   font-size: 1.5rem;
   z-index: 600;
   will-change: text-shadow;
-  animation: rgbText 2s steps(9) 0s infinite alternate;
+  animation: rgbText 3s steps(9) 0s infinite alternate;
 }
 
 .vhs-play .char {
   will-change: opacity;
-  animation: type 1.2s infinite alternate;
+  animation: type 2.5s infinite alternate;
   animation-delay: calc(60ms * var(--char-index));
 }
 
@@ -111,7 +111,7 @@
   font-size: 1.5rem;
   z-index: 600;
   will-change: text-shadow;
-  animation: rgbText 1s steps(9) 0s infinite alternate;
+  animation: rgbText 3s steps(9) 0s infinite alternate;
 }
 
 .vhs-counter {
@@ -123,7 +123,7 @@
   font-size: 1.2rem;
   z-index: 600;
   will-change: text-shadow;
-  animation: rgbText 1s steps(9) 0s infinite alternate;
+  animation: rgbText 3s steps(9) 0s infinite alternate;
 }
 
 /* Card styling for retro theme */
@@ -154,7 +154,7 @@
 /* Animated characters */
 .retro-text .char {
   will-change: opacity;
-  animation: type 1.2s infinite alternate;
+  animation: type 2.5s infinite alternate;
   display: inline-block;
 }
 
@@ -275,46 +275,58 @@
 
 @keyframes rgbText {
   0% {
-    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 1px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+    text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.4), 1px -1px 5px rgba(255, 255, 235, 0.5), 0px 0 1px rgba(251, 0, 231, 0.5), 0 0px 2px rgba(0, 233, 235, 0.5), 0px 0 2px rgba(0, 242, 14, 0.5), 0 0px 2px rgba(244, 45, 0, 0.5), 0px 0 2px rgba(59, 0, 226, 0.5);
   }
   25% {
-    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 1px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+    text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.4), 1px -1px 5px rgba(255, 255, 235, 0.5), 0px 0 1px rgba(251, 0, 231, 0.5), 0 0px 2px rgba(0, 233, 235, 0.5), 0px 0 2px rgba(0, 242, 14, 0.5), 0 0px 2px rgba(244, 45, 0, 0.5), 0px 0 2px rgba(59, 0, 226, 0.5);
   }
   45% {
-    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 5px 0 1px rgba(251, 0, 231, 0.8), 0 5px 1px rgba(0, 233, 235, 0.8), -5px 0 1px rgba(0, 242, 14, 0.8), 0 -5px 1px rgba(244, 45, 0, 0.8), 5px 0 1px rgba(59, 0, 226, 0.8);
+    text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.4), 1px -1px 5px rgba(255, 255, 235, 0.5), 3px 0 1px rgba(251, 0, 231, 0.5), 0 3px 1px rgba(0, 233, 235, 0.5), -3px 0 1px rgba(0, 242, 14, 0.5), 0 -3px 1px rgba(244, 45, 0, 0.5), 3px 0 1px rgba(59, 0, 226, 0.5);
   }
   50% {
-    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), -5px 0 1px rgba(251, 0, 231, 0.8), 0 -5px 1px rgba(0, 233, 235, 0.8), 5px 0 1px rgba(0, 242, 14, 0.8), 0 5px 1px rgba(244, 45, 0, 0.8), -5px 0 1px rgba(59, 0, 226, 0.8);
+    text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.4), 1px -1px 5px rgba(255, 255, 235, 0.5), -3px 0 1px rgba(251, 0, 231, 0.5), 0 -3px 1px rgba(0, 233, 235, 0.5), 3px 0 1px rgba(0, 242, 14, 0.5), 0 3px 1px rgba(244, 45, 0, 0.5), -3px 0 1px rgba(59, 0, 226, 0.5);
   }
   55% {
-    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 0px 0 3px rgba(251, 0, 231, 0.8), 0 0px 3px rgba(0, 233, 235, 0.8), 0px 0 3px rgba(0, 242, 14, 0.8), 0 0px 3px rgba(244, 45, 0, 0.8), 0px 0 3px rgba(59, 0, 226, 0.8);
+    text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.4), 1px -1px 5px rgba(255, 255, 235, 0.5), 0px 0 2px rgba(251, 0, 231, 0.5), 0 0px 2px rgba(0, 233, 235, 0.5), 0px 0 2px rgba(0, 242, 14, 0.5), 0 0px 2px rgba(244, 45, 0, 0.5), 0px 0 2px rgba(59, 0, 226, 0.5);
   }
   90% {
-    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), -5px 0 1px rgba(251, 0, 231, 0.8), 0 5px 1px rgba(0, 233, 235, 0.8), 5px 0 1px rgba(0, 242, 14, 0.8), 0 -5px 1px rgba(244, 45, 0, 0.8), 5px 0 1px rgba(59, 0, 226, 0.8);
+    text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.4), 1px -1px 5px rgba(255, 255, 235, 0.5), -3px 0 1px rgba(251, 0, 231, 0.5), 0 3px 1px rgba(0, 233, 235, 0.5), 3px 0 1px rgba(0, 242, 14, 0.5), 0 -3px 1px rgba(244, 45, 0, 0.5), 3px 0 1px rgba(59, 0, 226, 0.5);
   }
   100% {
-    text-shadow: -1px 1px 8px rgba(255, 255, 255, 0.6), 1px -1px 8px rgba(255, 255, 235, 0.7), 5px 0 1px rgba(251, 0, 231, 0.8), 0 -5px 1px rgba(0, 233, 235, 0.8), -5px 0 1px rgba(0, 242, 14, 0.8), 0 5px 1px rgba(244, 45, 0, 0.8), -5px 0 1px rgba(59, 0, 226, 0.8);
+    text-shadow: -1px 1px 5px rgba(255, 255, 255, 0.4), 1px -1px 5px rgba(255, 255, 235, 0.5), 3px 0 1px rgba(251, 0, 231, 0.5), 0 -3px 1px rgba(0, 233, 235, 0.5), -3px 0 1px rgba(0, 242, 14, 0.5), 0 3px 1px rgba(244, 45, 0, 0.5), -3px 0 1px rgba(59, 0, 226, 0.5);
   }
 }
 
 @keyframes type {
-  0%, 19% {opacity:0;}
-  20%, 100% {opacity:1;}
+  0%, 39% {opacity:0;}
+  40%, 100% {opacity:1;}
 }
 
 /* Mobile styles */
 @media (max-width: 640px) {
   .retro-text {
     font-size: 1.2rem;
-    line-height: 1.6;
+    line-height: 2;
+    letter-spacing: 0.5px;
   }
   
   .form-label {
     font-size: 0.7rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
   }
   
   .btn-primary {
     font-size: 0.7rem;
     padding: 0.8rem;
+    margin-top: 0.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 2.5rem;
+  }
+  
+  .card {
+    padding: 2.5rem 1.5rem;
   }
 } 

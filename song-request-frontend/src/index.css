@@ -118,6 +118,8 @@ body {
   overflow-x: hidden;
   width: 100%;
   justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 @layer base {
@@ -201,6 +203,59 @@ body {
 /* Responsive styles */
 @media (max-width: 640px) {
   html, body {
-    font-size: 14px;
+    font-size: 16px; /* Increased base font size */
+  }
+  
+  .card {
+    padding: 1.5rem;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+    border-radius: 12px;
+  }
+  
+  .form-input {
+    padding: 0.7rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .btn {
+    padding: 0.8rem;
+    font-size: 16px;
+    height: 50px; /* Ensure button has good tap target size */
+  }
+  
+  .title {
+    font-size: 1.8rem; /* Larger title */
+    margin-bottom: 1.2rem;
+    line-height: 1.3;
+  }
+  
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  .form-label {
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem; /* Larger labels */
+    font-weight: 600;
+  }
+  
+  .app-container {
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .card {
+    padding: 1.2rem;
+  }
+  
+  .title {
+    font-size: 1.6rem;
+  }
+  
+  .form-label {
+    font-size: 1rem;
   }
 }

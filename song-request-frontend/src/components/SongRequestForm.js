@@ -1,11 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useSpring, animated } from 'react-spring';
 import { submitSongRequest } from '../services/api';
+import NeumorphicInput from './NeumorphicInput';
+import NeumorphicButton from './NeumorphicButton';
+import LoadingSpinner from './LoadingSpinner';
 
 function SongRequestForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+  // Form field animations with sequential delays
+  const [titleFieldStyles, titleFieldApi] = useSpring(() => ({
+    from: { opacity: 0, transform: 'translateY(20px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    delay: 200,
+    config: {
+      tension: 150,
+      friction: 20
+    }
+  }));
+  
+  const [artistFieldStyles, artistFieldApi] = useSpring(() => ({
+    from: { opacity: 0, transform: 'translateY(20px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    delay: 300,
+    config: {
+      tension: 150,
+      friction: 20
+    }
+  }));
+  
+  const [buttonStyles, buttonApi] = useSpring(() => ({
+    from: { opacity: 0, transform: 'translateY(20px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    delay: 400,
+    config: {
+      tension: 150,
+      friction: 20
+    }
+  }));
+
+  // Start animations
+  useEffect(() => {
+    titleFieldApi.start();
+    artistFieldApi.start();
+    buttonApi.start();
+  }, [titleFieldApi, artistFieldApi, buttonApi]);
 
   const onSubmit = async (data) => {
     setIsSubmitting(true);
@@ -22,52 +64,46 @@ function SongRequestForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <div>
-        <label htmlFor="songTitle" className="block text-sm font-medium text-gray-700">
-          Song Title
-        </label>
-        <input
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
+      <animated.div style={titleFieldStyles}>
+        <NeumorphicInput
           id="songTitle"
           type="text"
-          className={`mt-1 block w-full px-3 py-2 border ${
-            errors.songTitle ? 'border-red-500' : 'border-gray-300'
-          } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+          label="Song Title"
+          placeholder="Enter song title"
+          error={errors.songTitle?.message}
           {...register('songTitle', { required: 'Song title is required' })}
         />
-        {errors.songTitle && (
-          <p className="mt-1 text-sm text-red-600">{errors.songTitle.message}</p>
-        )}
-      </div>
+      </animated.div>
 
-      <div>
-        <label htmlFor="artistName" className="block text-sm font-medium text-gray-700">
-          Artist Name
-        </label>
-        <input
+      <animated.div style={artistFieldStyles}>
+        <NeumorphicInput
           id="artistName"
           type="text"
-          className={`mt-1 block w-full px-3 py-2 border ${
-            errors.artistName ? 'border-red-500' : 'border-gray-300'
-          } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
+          label="Artist Name"
+          placeholder="Enter artist name"
+          error={errors.artistName?.message}
           {...register('artistName', { required: 'Artist name is required' })}
         />
-        {errors.artistName && (
-          <p className="mt-1 text-sm text-red-600">{errors.artistName.message}</p>
-        )}
-      </div>
+      </animated.div>
 
-      <div>
-        <button
+      <animated.div style={buttonStyles} className="pt-2">
+        <NeumorphicButton
           type="submit"
           disabled={isSubmitting}
-          className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
-            isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
+          variant="primary"
+          className="w-full"
         >
-          {isSubmitting ? 'Submitting...' : 'Submit Request'}
-        </button>
-      </div>
+          {isSubmitting ? (
+            <div className="flex items-center justify-center">
+              <LoadingSpinner size="sm" className="mr-2" />
+              <span>Submitting...</span>
+            </div>
+          ) : (
+            'Submit Request'
+          )}
+        </NeumorphicButton>
+      </animated.div>
     </form>
   );
 }

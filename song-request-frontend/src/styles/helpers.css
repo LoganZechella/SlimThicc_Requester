@@ -1,0 +1,57 @@
+/* Fix for mobile viewport height */
+html {
+  height: -webkit-fill-available;
+}
+
+/* CSS custom properties for our theme */
+:root {
+  --primary-color: #ab47bc;
+  --primary-light: #ce93d8;
+  --primary-dark: #8e24aa;
+  --secondary-color: #ff4993;
+  --secondary-light: #ff7eb6;
+  --secondary-dark: #e6005e;
+  --accent-color: #5c6bc0;
+  --accent-light: #9fa8da;
+  --accent-dark: #3949ab;
+  --bg-color: #f5f5f5;
+  --text-color: #1f2937;
+  --card-bg: rgba(255, 255, 255, 0.3);
+  --card-border: rgba(255, 255, 255, 0.3);
+  --shadow-color: #d1d9e6;
+  --highlight-color: #ffffff;
+}
+
+/* Ensure inputs work properly on iOS */
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+/* Fix for iOS Safari 100vh issue */
+.min-h-screen {
+  min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
+}
+
+/* Center content utility class */
+.center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gradient background */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg-color) 50%, var(--secondary-light) 100%);
+  background-attachment: fixed;
+} 

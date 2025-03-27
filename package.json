@@ -1,0 +1,14 @@
+{
+  "name": "song-request-system",
+  "version": "1.0.0",
+  "description": "DJ song request system with Spotify integration",
+  "scripts": {
+    "start:backend": "cd song-request-backend && npm run dev",
+    "start:frontend": "cd song-request-frontend && npm start",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "auth": "cd song-request-backend && npm run auth"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 
